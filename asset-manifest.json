@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.045105ae.css",
+    "main.js": "/static/js/main.b1736f13.js",
+    "static/media/cli-chat-logo.png": "/static/media/cli-chat-logo.f26a0311034a1f3b8c75.png",
+    "static/media/ferisnotes-logo.png": "/static/media/ferisnotes-logo.1535e4e81ad70fcc5a86.png",
+    "static/media/curve.svg": "/static/media/curve.cb2fcc0a96e10c299ca7.svg",
+    "index.html": "/index.html",
+    "main.045105ae.css.map": "/static/css/main.045105ae.css.map",
+    "main.b1736f13.js.map": "/static/js/main.b1736f13.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.045105ae.css",
+    "static/js/main.b1736f13.js"
+  ]
+}
