@@ -1,0 +1,186 @@
+---
+import { baseUrl, site } from "../data/site";
+
+const base = baseUrl;
+
+const links = [
+	{ href: `${base}#projekty`, label: "Projekty" },
+	{ href: `${base}#o-mnie`, label: "O mnie" },
+	{ href: `${base}#kontakt`, label: "Kontakt" },
+];
+---
+
+<header class="site-header" data-header>
+	<div class="container bar">
+		<a class="logo" href={base}>{site.name}</a>
+		<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" data-nav-toggle>
+			<span class="sr-only">Menu</span>
+			<span class="bars" aria-hidden="true"></span>
+		</button>
+		<nav id="nav-menu" class="nav" aria-label="Główne">
+			<ul>
+				{
+					links.map((link) => (
+						<li>
+							<a class="underline" href={link.href}>{link.label}</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<script>
+	import "../scripts/nav.ts";
+</script>
+
+<style>
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		height: var(--header-h);
+		isolation: isolate;
+	}
+
+	.site-header::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background: var(--bg);
+		opacity: 0.62;
+		backdrop-filter: blur(14px);
+		transition: opacity var(--duration) var(--ease);
+	}
+
+	.site-header.is-scrolled::before,
+	.site-header.is-open::before {
+		opacity: 1;
+	}
+
+	.site-header.is-scrolled::after,
+	.site-header.is-open::after {
+		content: "";
+		position: absolute;
+		z-index: 1;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		height: 1px;
+		background: var(--border);
+		pointer-events: none;
+	}
+
+	.bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 100%;
+		gap: var(--space-3);
+	}
+
+	.logo {
+		color: var(--text);
+		font-size: var(--step--1);
+		font-weight: 520;
+		letter-spacing: -0.01em;
+		text-decoration: none;
+	}
+
+	.logo:hover {
+		color: var(--accent);
+	}
+
+	.nav-toggle {
+		display: none;
+		align-items: center;
+		justify-content: center;
+		width: 2.5rem;
+		height: 2.5rem;
+		padding: 0;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: transparent;
+		color: var(--text);
+		cursor: pointer;
+	}
+
+	.bars,
+	.bars::before,
+	.bars::after {
+		display: block;
+		width: 1rem;
+		height: 1px;
+		background: currentColor;
+	}
+
+	.bars {
+		position: relative;
+	}
+
+	.bars::before,
+	.bars::after {
+		content: "";
+		position: absolute;
+		left: 0;
+	}
+
+	.bars::before {
+		top: -5px;
+	}
+
+	.bars::after {
+		top: 5px;
+	}
+
+	.nav ul {
+		display: flex;
+		gap: var(--space-4);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.nav a {
+		color: var(--text-muted);
+		font-size: var(--step--1);
+		text-decoration: none;
+	}
+
+	.nav a:hover {
+		color: var(--text);
+	}
+
+	@media (max-width: 767px) {
+		.nav-toggle {
+			display: inline-flex;
+		}
+
+		.nav {
+			display: none;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			padding: var(--space-2) 1rem var(--space-3);
+			background: var(--bg);
+			border-bottom: 1px solid var(--border);
+		}
+
+		.site-header.is-open .nav {
+			display: block;
+		}
+
+		.nav ul {
+			flex-direction: column;
+			gap: var(--space-1);
+		}
+
+		.nav a {
+			display: block;
+			padding: var(--space-2) 0;
+		}
+	}
+</style>

@@ -1,0 +1,127 @@
+---
+import { getCollection, render } from "astro:content";
+import { baseUrl } from "../../data/site";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+	const projects = await getCollection("projects");
+	return projects.map((project) => ({
+		params: { slug: project.id },
+		props: { project },
+	}));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const hasLinks = Boolean(project.data.demo || project.data.repo);
+---
+
+<BaseLayout title={project.data.title} description={project.data.description}>
+	<article class="container project">
+		<p class="back"><a class="underline" href={`${baseUrl}#projekty`}>Wszystkie projekty</a></p>
+		<h1>{project.data.title}</h1>
+		<p class="summary">{project.data.description}</p>
+		<ul class="tags">
+			{project.data.tags.map((tag) => <li>{tag}</li>)}
+		</ul>
+		{
+			hasLinks && (
+				<p class="links">
+					{project.data.demo && (
+						<a class="underline" href={project.data.demo}>
+							Demo
+						</a>
+					)}
+					{project.data.repo && (
+						<a class="underline" href={project.data.repo}>
+							Repo
+						</a>
+					)}
+				</p>
+			)
+		}
+		<div class="content">
+			<Content />
+		</div>
+	</article>
+</BaseLayout>
+
+<style>
+	.project {
+		padding-block: var(--space-section);
+	}
+
+	.back {
+		margin: 0 0 var(--space-5);
+	}
+
+	.back a {
+		color: var(--text-muted);
+	}
+
+	h1 {
+		margin: 0;
+		max-width: 16ch;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-weight: 400;
+		font-size: var(--step-2);
+		letter-spacing: -0.03em;
+		line-height: 1.05;
+	}
+
+	.summary {
+		max-width: 40rem;
+		margin: var(--space-4) 0 0;
+		color: var(--text-muted);
+	}
+
+	.tags,
+	.links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2);
+		margin: var(--space-4) 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.tags li {
+		padding: 0.15rem 0.55rem;
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		color: var(--text-muted);
+		font-size: var(--step--1);
+	}
+
+	.links a,
+	.content :global(a) {
+		color: var(--accent);
+	}
+
+	.content {
+		margin-top: var(--space-5);
+	}
+
+	.content :global(p) {
+		max-width: 40rem;
+		margin: 0;
+	}
+
+	.content :global(p + p) {
+		margin-top: var(--space-3);
+	}
+
+	.content :global(p:has(img)) {
+		max-width: none;
+		margin-top: var(--space-4);
+	}
+
+	.content :global(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+	}
+</style>

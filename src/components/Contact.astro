@@ -1,0 +1,51 @@
+---
+import { site } from "../data/site";
+import Section from "./Section.astro";
+---
+
+<Section id="kontakt" title="Kontakt">
+	<div data-reveal>
+		<p>
+			Masz pomysł na projekt lub chcesz porozmawiać o współpracy? Napisz do mnie lub sprawdź moje projekty na
+			GitHubie.
+		</p>
+		<ul>
+			<li><a class="underline" href={`mailto:${site.email}`}>{site.email}</a></li>
+			<li><a class="underline" href={site.github}>GitHub</a></li>
+			{
+				site.linkedin && (
+					<li>
+						<a class="underline" href={site.linkedin}>
+							LinkedIn
+						</a>
+					</li>
+				)
+			}
+		</ul>
+	</div>
+</Section>
+
+<style>
+	p {
+		max-width: 36rem;
+		margin: 0;
+	}
+
+	ul {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--space-2);
+		margin: var(--space-4) 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	a {
+		color: var(--accent);
+	}
+
+	li {
+		color: var(--text-muted);
+	}
+</style>

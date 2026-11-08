@@ -1,0 +1,26 @@
+<div class="scene" aria-hidden="true">
+	<div class="glow"></div>
+	<canvas data-hero-canvas></canvas>
+</div>
+
+<style>
+	.scene,
+	canvas,
+	.glow {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+	}
+
+	canvas {
+		z-index: 0;
+	}
+
+	.glow {
+		background:
+			radial-gradient(55% 45% at 72% 38%, rgb(126 224 195 / 0.14), transparent 62%),
+			radial-gradient(40% 36% at 18% 78%, rgb(255 255 255 / 0.05), transparent 70%);
+	}
+</style>

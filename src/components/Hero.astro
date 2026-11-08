@@ -1,0 +1,77 @@
+---
+import { site } from "../data/site";
+import HeroScene from "./HeroScene.astro";
+---
+
+<section class="hero" aria-labelledby="hero-title">
+	<HeroScene />
+	<div class="container copy">
+		<p class="role">{site.role}</p>
+		<h1 id="hero-title">{site.name}</h1>
+		<p class="lede">
+			Tworzę aplikacje internetowe i oprogramowanie, łącząc nowoczesne technologie frontendowe z
+			rozwiązaniami backendowymi.
+		</p>
+		<p class="actions">
+			<a class="underline primary" href="#projekty">Projekty</a>
+			<a class="underline" href="#kontakt">Kontakt</a>
+		</p>
+	</div>
+</section>
+
+<script>
+	import "../scripts/hero.ts";
+</script>
+
+<style>
+	.hero {
+		position: relative;
+		display: flex;
+		align-items: flex-end;
+		min-height: calc(100svh - var(--header-h));
+	}
+
+	.copy {
+		position: relative;
+		z-index: 1;
+		padding-block: clamp(4rem, 12vh, 8rem);
+	}
+
+	.role {
+		margin: 0 0 var(--space-2);
+		color: var(--text-muted);
+		font-size: var(--step--1);
+	}
+
+	h1 {
+		margin: 0;
+		max-width: 11ch;
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-weight: 400;
+		font-size: var(--step-3);
+		letter-spacing: -0.03em;
+		line-height: 0.95;
+	}
+
+	.lede {
+		max-width: 36rem;
+		margin: var(--space-4) 0 0;
+		color: var(--text-muted);
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2) var(--space-4);
+		margin: var(--space-4) 0 0;
+	}
+
+	.actions a {
+		color: var(--text);
+	}
+
+	.actions a.primary {
+		color: var(--accent);
+	}
+</style>

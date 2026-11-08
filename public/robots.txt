@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fer1s.github.io/sitemap-index.xml

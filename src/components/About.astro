@@ -1,0 +1,81 @@
+---
+import Section from './Section.astro'
+
+const skills = [
+   'JavaScript',
+   'TypeScript',
+   'HTML',
+   'CSS',
+   'React.js',
+   'Next.js',
+   'Astro',
+   'Node.js',
+   'Express.js',
+   'Fastify',
+   'MongoDB',
+   'Redis',
+   'SQL',
+   'Tailwind CSS',
+   'Docker',
+   'Tauri',
+   'Git - podstawy',
+   'GitHub - podstawy',
+   'Go - podstawy',
+   'Windows',
+   'Linux',
+]
+---
+
+<Section id="o-mnie" title="O mnie">
+   <div class="about" data-reveal>
+      <p>
+         Programowaniem interesuję się od 2020 roku, a największą satysfakcję daje mi tworzenie praktycznych rozwiązań, które odpowiadają na rzeczywiste potrzeby. Najlepiej odnajduję się w ekosystemie
+         JavaScript i TypeScript, szczególnie w technologiach webowych.
+      </p>
+      <p>
+         Mam doświadczenie w samodzielnym realizowaniu projektów obejmujących zarówno frontend, jak i backend, od zaprojektowania rozwiązania, przez implementację, aż po wdrożenie. Chętnie poznaję
+         nowe technologie, eksperymentuję i stale rozwijam swoje umiejętności.
+      </p>
+      <h3>Umiejętności</h3>
+      <ul class="skills">
+         {skills.map((skill) => <li>{skill}</li>)}
+      </ul>
+   </div>
+</Section>
+
+<style>
+   .about {
+      max-width: 42rem;
+   }
+
+   p {
+      margin: 0;
+   }
+
+   p + p {
+      margin-top: var(--space-3);
+   }
+
+   h3 {
+      margin: var(--space-5) 0 var(--space-3);
+      font-size: var(--step-0);
+      font-weight: 520;
+   }
+
+   .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+   }
+
+   .skills li {
+      padding: 0.2rem 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-muted);
+      font-size: var(--step--1);
+   }
+</style>

@@ -1,0 +1,48 @@
+---
+import { getCollection } from "astro:content";
+import About from "../components/About.astro";
+import Contact from "../components/Contact.astro";
+import Hero from "../components/Hero.astro";
+import PageField from "../components/PageField.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import Section from "../components/Section.astro";
+import { site } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const projects = (await getCollection("projects")).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title={site.name} description={site.description}>
+	<Hero />
+	<PageField>
+		<Section id="projekty" title="Projekty">
+			<ul class="grid">
+				{
+					projects.map((project) => (
+						<li data-reveal>
+							<ProjectCard project={project} />
+						</li>
+					))
+				}
+			</ul>
+		</Section>
+		<About />
+		<Contact />
+	</PageField>
+</BaseLayout>
+
+<style>
+	.grid {
+		display: grid;
+		gap: var(--space-3);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	@media (min-width: 768px) {
+		.grid {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+</style>

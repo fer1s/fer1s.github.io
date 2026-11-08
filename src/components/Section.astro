@@ -1,0 +1,27 @@
+---
+interface Props {
+   id: string
+   title: string
+}
+
+const { id, title } = Astro.props
+---
+
+<section id={id} class="section" data-reveal-group>
+   <div class="container">
+      <h2 data-reveal>{title}</h2>
+      <slot />
+   </div>
+</section>
+
+<style>
+   .section {
+      padding-block: var(--space-section);
+      scroll-margin-top: calc(var(--header-h) + var(--space-3));
+   }
+
+   h2 {
+      margin: 0 0 var(--space-5);
+      font-size: var(--step-2);
+   }
+</style>

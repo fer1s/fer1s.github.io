@@ -1,0 +1,134 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { baseUrl } from "../data/site";
+
+interface Props {
+	project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const href = `${baseUrl}projects/${project.id}/`;
+const hasLinks = Boolean(project.data.demo || project.data.repo);
+---
+
+<article class="card" data-card>
+	<h3><a class="underline" href={href}>{project.data.title}</a></h3>
+	<p>{project.data.description}</p>
+	<div class="meta">
+		<ul class="tags">
+			{project.data.tags.map((tag) => <li>{tag}</li>)}
+		</ul>
+		{
+			hasLinks && (
+				<p class="links">
+					{project.data.demo && (
+						<a class="underline" href={project.data.demo}>
+							Demo
+						</a>
+					)}
+					{project.data.repo && (
+						<a class="underline" href={project.data.repo}>
+							Repo
+						</a>
+					)}
+				</p>
+			)
+		}
+	</div>
+</article>
+
+<style>
+	.card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		overflow: hidden;
+		padding: var(--space-4);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: var(--surface);
+		transform: translateY(0);
+		transition: transform var(--duration) var(--ease);
+	}
+
+	.card::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(
+			280px circle at var(--x, 50%) var(--y, 0%),
+			rgb(126 224 195 / 0.14),
+			transparent 55%
+		);
+		opacity: 0;
+		transition: opacity var(--duration) var(--ease);
+		pointer-events: none;
+	}
+
+	.card:hover {
+		transform: translateY(-3px);
+		border-color: rgb(255 255 255 / 0.18);
+	}
+
+	.card:hover::before,
+	.card:focus-within::before {
+		opacity: 1;
+	}
+
+	.card:focus-within {
+		border-color: rgb(255 255 255 / 0.18);
+	}
+
+	h3,
+	p,
+	.meta {
+		position: relative;
+	}
+
+	h3 {
+		margin: 0 0 var(--space-2);
+		font-size: var(--step-1);
+	}
+
+	h3 a {
+		color: var(--text);
+	}
+
+	p {
+		margin: 0;
+		color: var(--text-muted);
+	}
+
+	.meta {
+		margin-top: auto;
+		padding-top: var(--space-4);
+	}
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-1);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.tags li {
+		padding: 0.15rem 0.55rem;
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		color: var(--text-muted);
+		font-size: var(--step--1);
+	}
+
+	.links {
+		display: flex;
+		gap: var(--space-3);
+		margin-top: var(--space-3);
+	}
+
+	.links a {
+		color: var(--accent);
+	}
+</style>

@@ -1,0 +1,36 @@
+:root {
+	--bg: #0a0a0b;
+	--surface: #111113;
+	--border: rgba(255, 255, 255, 0.08);
+	--text: #ededee;
+	--text-muted: #8a8a90;
+	--accent: #7ee0c3;
+
+	--font-sans: "Inter Variable", system-ui, sans-serif;
+	--font-serif: "Instrument Serif", Georgia, serif;
+
+	--space-1: 0.5rem;
+	--space-2: 1rem;
+	--space-3: 1.5rem;
+	--space-4: 2rem;
+	--space-5: 3rem;
+	--space-6: 4rem;
+	--space-section: clamp(5rem, 12vw, 10rem);
+
+	--content: 68.75rem;
+	--header-h: 4rem;
+	--radius: 12px;
+
+	--ease: cubic-bezier(0.22, 1, 0.36, 1);
+	--duration: 200ms;
+	--duration-reveal: 700ms;
+
+	--step--1: clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem);
+	--step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+	--step-1: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+	--step-2: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+	--step-3: clamp(2.75rem, 1.4rem + 4.5vw, 5rem);
+
+	color-scheme: dark;
+	background: var(--bg);
+}
